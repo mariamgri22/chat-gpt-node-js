@@ -12,11 +12,11 @@ const openai = new OpenAIApi(configuration);
 
 async function chatGPTAnswer() {
   try {
-    const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt,
+    const completion = await openai.createChatCompletion ({
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: `${prompt}` }],
     });
-    console.log(completion.data.choices[0].text);
+    console.log(completion.data.choices[0].message.content);
   } catch (error) {
     if (error.response) {
       console.log(error.response.status);
